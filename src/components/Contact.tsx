@@ -83,7 +83,7 @@ const Contact: React.FC<ContactProps> = ({ onGoBack }) => {
           <input
             type="text"
             id="name"
-            placeholder="John Doe"
+            placeholder="Aryan Mokashi"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 border border-gray-300 dark:border-gray-600 focus:border-orange-500 focus:ring focus:ring-orange-500 focus:ring-opacity-50"
