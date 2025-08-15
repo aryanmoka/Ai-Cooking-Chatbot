@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CookBot - AI Cooking Chatbot
 
 A full-stack AI-powered cooking assistant built with React, Flask, and OpenAI GPT-3.5.
@@ -209,3 +210,6 @@ Health check endpoint.
 ## License
 
 This project is licensed under the MIT License.
+=======
+# Ai-Cooking-Chatbot
+>>>>>>> b3ba9f55b22a2371b4b61353d3c87617830f6271
