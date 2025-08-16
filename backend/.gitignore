@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.env
+
+# Dependencies
+requirements.txt
