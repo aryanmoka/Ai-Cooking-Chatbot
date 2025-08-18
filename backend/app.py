@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS # Ensure this is imported
 import google.generativeai as genai
 import os
 import json
@@ -7,30 +7,34 @@ from dotenv import load_dotenv
 import uuid
 from datetime import datetime
 from database import Database
-import smtplib # Import for sending emails
-import ssl # Import for secure SSL connection
+import smtplib
+import ssl
 
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+# Configure CORS to allow specific origins
+# Replace 'YOUR_NETLIFY_FRONTEND_URL' with the actual URL of your Netlify frontend
+# e.g., 'https://your-chef-byte-site.netlify.app'
+# It's good practice to list all allowed origins explicitly.
+CORS(app, resources={r"/api/*": {"origins": [
+    "http://localhost:5173", # For local development
+    "https://ai-cooking-chatbot-1.netlify.app" # Replace with your actual Netlify frontend URL
+    # Add any other frontend URLs if you have them, e.g., custom domains
+]}})
+
 
 # Configure the Gemini API with your key
 try:
     genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 except Exception as e:
     print(f"Error configuring Gemini API: {e}")
-    # For now, we'll just print, but in production, you might want to exit or disable AI features.
 
-# Email configuration (NEW)
-# Make sure these are set in your .env file
-# GMAIL_APP_EMAIL="your-gmail-address@gmail.com"
-# GMAIL_APP_PASSWORD="your-16-digit-app-password"
 SENDER_EMAIL = os.getenv('GMAIL_APP_EMAIL')
 SENDER_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')
 RECEIVER_EMAIL = "aryanmokashi28@gmail.com" # Your email to receive messages
 
-# Initialize Database
 db = Database()
 
 SYSTEM_PROMPT = """You are CookBot, a friendly and knowledgeable cooking assistant. Your role is to help users with all things cooking-related.
@@ -64,7 +68,6 @@ generation_config = {
     "response_mime_type": "application/json"
 }
 
-# Model initialized without system_instruction here
 model = genai.GenerativeModel(
     model_name="gemini-1.5-flash-latest",
     generation_config=generation_config
@@ -91,7 +94,6 @@ def chat():
                     "parts": [{"text": message['content']}]
                 })
 
-        # system_instruction is passed when starting the chat session
         chat_session = model.start_chat(
             history=history,
             system_instruction=SYSTEM_PROMPT
@@ -136,7 +138,6 @@ def chat():
         print(f"Chat endpoint error: {str(e)}")
         return jsonify({'error': 'An error occurred processing your request'}), 500
 
-# NEW: Contact form submission endpoint
 @app.route('/api/contact', methods=['POST'])
 def handle_contact_form():
     try:
@@ -152,7 +153,6 @@ def handle_contact_form():
             print("Email sender credentials not configured in .env")
             return jsonify({'error': 'Email service not configured.'}), 500
 
-        # Create the email message
         email_message = f"""\
 From: {SENDER_EMAIL}
 To: {RECEIVER_EMAIL}
@@ -163,7 +163,6 @@ Email: {email}
 Message:
 {message}
 """
-        # Secure the connection with SSL
         context = ssl.create_default_context()
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
@@ -186,7 +185,6 @@ def save_recipe():
         if not session_id or not recipe_data:
             return jsonify({'error': 'Missing required data'}), 400
         
-        # Save recipe to database
         recipe_id = db.save_recipe(session_id, recipe_data)
         
         return jsonify({
@@ -199,7 +197,7 @@ def save_recipe():
         print(f"Save recipe error: {str(e)}")
         return jsonify({'error': 'Failed to save recipe'}), 500
 
-@app.route('/api/my_recipes', methods=['GET'])
+@app.route('/api/my_recipes', methods=['GET'})
 def get_my_recipes():
     try:
         session_id = request.args.get('session_id')
@@ -217,7 +215,7 @@ def get_my_recipes():
         print(f"Get recipes error: {str(e)}")
         return jsonify({'error': 'Failed to retrieve recipes'}), 500
 
-@app.route('/api/health', methods=['GET'])
+@app.route('/api/health', methods=['GET'})
 def health_check():
     return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
 
