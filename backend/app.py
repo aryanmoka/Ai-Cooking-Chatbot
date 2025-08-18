@@ -64,10 +64,10 @@ generation_config = {
     "response_mime_type": "application/json"
 }
 
+# Model initialized without system_instruction here
 model = genai.GenerativeModel(
     model_name="gemini-1.5-flash-latest",
-    generation_config=generation_config,
-    system_instruction=SYSTEM_PROMPT
+    generation_config=generation_config
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -91,7 +91,11 @@ def chat():
                     "parts": [{"text": message['content']}]
                 })
 
-        chat_session = model.start_chat(history=history)
+        # system_instruction is passed when starting the chat session
+        chat_session = model.start_chat(
+            history=history,
+            system_instruction=SYSTEM_PROMPT
+        )
         
         response = chat_session.send_message(user_message)
         
