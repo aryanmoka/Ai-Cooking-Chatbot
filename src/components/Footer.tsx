@@ -1,26 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Linkedin, Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  // Removed state variables for name, email, and message as the contact form is being removed.
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [message, setMessage] = useState('');
-
-  // Removed handleEmailSubmit function as the contact form is being removed.
-  // const handleEmailSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const recipient = 'aryanmokashi28@gmail.com';
-  //   const subject = encodeURIComponent('Contact from Chef Byte Website');
-  //   const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-  //   window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-  //
-  //   setName('');
-  //   setEmail('');
-  //   setMessage('');
-  // };
-
+  
   return (
     <footer className="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12 transition-colors duration-300">
       <div className="container mx-auto px-4">
@@ -48,45 +31,6 @@ const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-
-          {/* Contact Us Section - REMOVED */}
-          {/*
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h4 className="font-semibold text-lg mb-3">Send Us a Message</h4>
-            <form onSubmit={handleEmailSubmit} className="w-full max-w-xs space-y-3">
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:border-orange-500 focus:ring focus:ring-orange-500 focus:ring-opacity-50"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:border-orange-500 focus:ring focus:ring-orange-500 focus:ring-opacity-50"
-                required
-              />
-              <textarea
-                placeholder="Your Message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={4}
-                className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:border-orange-500 focus:ring focus:ring-orange-500 focus:ring-opacity-50 resize-y"
-                required
-              ></textarea>
-              <button
-                type="submit"
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200"
-              >
-                Send Email
-              </button>
-            </form>
-          </div>
-          */}
         </div>
 
         {/* Copyright */}

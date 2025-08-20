@@ -1,15 +1,22 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+// >>> IMPORTANT: Verify this path matches your actual file structure <<<
+import { useTheme } from '../contexts/ThemeContext'; 
 
+// HeaderProps no longer needs onShowContact, as navigation is handled by App component
 interface HeaderProps {
-  onShowContact: () => void; // Prop to show the contact page
+  // If you want to keep the header fixed at the top and avoid content overlapping,
+  // this component doesn't need props for navigation directly.
+  // The main App component will render the fixed header.
 }
 
-const Header: React.FC<HeaderProps> = ({ onShowContact }) => { // Accept the onShowContact prop
+const Header: React.FC<HeaderProps> = () => {
   const { isDark, toggleTheme } = useTheme();
 
   return (
+    // This header styling is now integrated directly into the App.tsx's fixed header.
+    // This component will be removed or refactored if the App component's header is used.
+    // For now, assuming this is a standalone header that will be replaced.
     <header className="bg-orange-600 dark:bg-gray-800 shadow-lg transition-colors duration-300">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -23,21 +30,9 @@ const Header: React.FC<HeaderProps> = ({ onShowContact }) => { // Accept the onS
             </span>
           </div>
 
-          {/* Right side: Navigation and Theme Toggle */}
+          {/* Right side: Theme Toggle only */}
           <div className="flex items-center space-x-6">
-            {/* Navigation Links */}
-            <nav className="hidden md:block">
-              <ul className="flex space-x-6">
-                <li>
-                  <a href="#" onClick={() => window.location.reload()} className="text-white hover:text-orange-200 dark:hover:text-gray-300 transition-colors duration-200 font-medium">Home</a>
-                </li>
-                <li>
-                  {/* FIX: Call onShowContact when the Contact link is clicked */}
-                  <a href="#" onClick={onShowContact} className="text-white hover:text-orange-200 dark:hover:text-gray-300 transition-colors duration-200 font-medium">Contact</a>
-                </li>
-              </ul>
-            </nav>
-
+            {/* Navigation Links are removed from here, as they are handled by the App component's main header */}
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}

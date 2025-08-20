@@ -40,7 +40,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
 
   return (
     <div className="max-w-4xl mx-auto py-12">
-      {/* Hero Section */}
+      {/* Hero Section: Welcome message and call to action */}
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           Welcome to
@@ -51,14 +51,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
         </p>
 
         <button
-          onClick={onStartChat}
+          onClick={onStartChat} // Triggers navigation to the chat interface
           className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           Start Cooking Together
         </button>
       </div>
 
-      {/* Features Grid */}
+      {/* Features Grid: Highlights key functionalities of the chatbot */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {features.map((feature, index) => (
           <div
@@ -66,7 +66,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
             className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
           >
             <div className="text-orange-600 dark:text-orange-400 mb-3">
-              {feature.icon}
+              {feature.icon} {/* Lucide icon for the feature */}
             </div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
               {feature.title}
@@ -78,7 +78,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
         ))}
       </div>
 
-      {/* Example Prompts */}
+      {/* Example Prompts: Suggestions for what users can ask */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
           Try asking me...
@@ -88,8 +88,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
             <button
               key={index}
               onClick={() => {
-                onStartChat();
-                // We'll implement auto-filling the prompt later
+                onStartChat(); // Clicking an example prompt also navigates to chat
+                // Future enhancement: Auto-fill the prompt into the chat input field
               }}
               className="text-left p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 group"
             >

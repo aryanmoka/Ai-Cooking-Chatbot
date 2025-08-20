@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Send, ArrowLeft, Loader2 } from 'lucide-react'; // Mail icon is no longer directly used in JSX
-import { chatAPI } from '../services/api';
+import { Send, ArrowLeft, Loader2 } from 'lucide-react'; 
+import { chatAPI } from '../services/api'; // This path assumes Contact.tsx is in 'src/components/' and api.ts is in 'src/services/'
 
 interface ContactProps {
   onGoBack: () => void;
@@ -14,17 +14,20 @@ const Contact: React.FC<ContactProps> = ({ onGoBack }) => {
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
 
+  // Handles the submission of the contact form
   const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setSubmitMessage(null);
-    setIsError(false);
+    e.preventDefault(); // Prevent default form submission behavior
+    setLoading(true); // Show loading indicator
+    setSubmitMessage(null); // Clear previous messages
+    setIsError(false); // Reset error state
 
     try {
+      // Send contact message via API
       const response = await chatAPI.sendContactMessage({ name, email, message });
       if (response.success) {
         setSubmitMessage('Your message has been sent successfully!');
         setIsError(false);
+        // Clear form fields on success
         setName('');
         setEmail('');
         setMessage('');
@@ -37,14 +40,14 @@ const Contact: React.FC<ContactProps> = ({ onGoBack }) => {
       setIsError(true);
       console.error("Contact form submission error:", err);
     } finally {
-      setLoading(false);
-      setTimeout(() => setSubmitMessage(null), 5000);
+      setLoading(false); // Hide loading indicator
+      setTimeout(() => setSubmitMessage(null), 5000); // Clear submission message after 5 seconds
     }
   };
 
   return (
     <div className="max-w-3xl mx-auto py-12 px-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl mt-8">
-      {/* Back Button */}
+      {/* Back Button to navigate to the previous view (chatbot) */}
       <button
         onClick={onGoBack}
         className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 mb-6"
@@ -56,7 +59,6 @@ const Contact: React.FC<ContactProps> = ({ onGoBack }) => {
 
       {/* Page Title and Description */}
       <div className="text-center mb-8">
-        {/* Removed the Mail SVG icon */}
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Get in Touch
         </h2>
@@ -65,7 +67,7 @@ const Contact: React.FC<ContactProps> = ({ onGoBack }) => {
         </p>
       </div>
 
-      {/* Submission Message */}
+      {/* Submission Message Display (Success or Error) */}
       {submitMessage && (
         <div className={`px-4 py-3 rounded-lg mb-6 text-center ${
           isError ? 'bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400' : 'bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400'
