@@ -15,10 +15,12 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configure CORS to allow specific origins
-# IMPORTANT: Replace 'https://zingy-semolina-c28af8.netlify.app' with your ACTUAL Netlify frontend URL
+# IMPORTANT: Updated with your new Netlify frontend URL
 CORS(app, resources={r"/api/*": {"origins": [
     "http://localhost:5173", # For local development
-    "https://zingy-semolina-c28af8.netlify.app" # <--- **UPDATE THIS WITH YOUR EXACT NETLIFY URL**
+    "https://cookingchatbot.netlify.app" # <--- **UPDATED WITH YOUR NEW NETLIFY URL**
+    # You might also want to keep your old Netlify URL if it's still active:
+    # "https://zingy-semolina-c28af8.netlify.app"
     # Add any other frontend URLs if you have them, e.g., custom domains
 ]}})
 
