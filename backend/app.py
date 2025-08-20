@@ -157,8 +157,7 @@ To: {RECEIVER_EMAIL}
 Subject: Chef Byte Contact Form: {name}
 
 Name: {name}
-Email: {email}
-Message:
+Email:
 {message}
 """
         context = ssl.create_default_context()
