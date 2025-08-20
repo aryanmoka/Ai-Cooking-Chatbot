@@ -30,7 +30,7 @@ CORS(app, resources={r"/api/*": {"origins": [
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 SENDER_EMAIL = os.getenv('GMAIL_APP_EMAIL')
 SENDER_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')
-RECEIVER_EMAIL = os.getenv('RECEIVER_EMAIL', "your_admin_email@example.com") # Make receiver email configurable too
+RECEIVER_EMAIL = os.getenv('GMAIL_APP_EMAIL') # Make receiver email configurable too
 
 # Validate essential environment variables
 if not GEMINI_API_KEY:

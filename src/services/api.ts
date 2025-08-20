@@ -1,7 +1,7 @@
     import axios from 'axios';
 
     // UPDATED: Pointing to your new deployed Render backend URL
-    const API_BASE_URL = 'https://ai-cooking-chatbot-2.onrender.com/api'; // <--- UPDATE THIS LINE
+    const API_BASE_URL = import.meta.env.BACKEND_URI; // <--- UPDATE THIS LINE
   // const API_BASE_URL = "http://127.0.0.1:5000/api"
 
     const api = axios.create({
