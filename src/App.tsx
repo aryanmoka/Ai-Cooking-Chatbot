@@ -6,7 +6,8 @@ import WelcomeScreen from './components/WelcomeScreen';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 // If ThemeContext.tsx is in 'src/contexts/', this path is correct.
-import { ThemeProvider, useTheme } from './contexts/ThemeContext'; 
+// ThemeProvider is removed from here as it will wrap App externally.
+import { useTheme } from './contexts/ThemeContext'; 
 // >>> END PATH VERIFICATION <<<
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
 
   // Access theme context directly in App
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, toggleTheme } = useTheme(); 
 
   // Initialize session ID on component mount
   useEffect(() => {
@@ -33,8 +34,8 @@ function App() {
       setHasStartedChat(true);
       setShowContactPage(false);
     } else if (view === 'contact') {
-      setShowContactPage(true);
-      setHasStartedChat(false);
+      setHasStartedChat(true); // Should be false, as contact page is shown
+      setShowContactPage(false); // Should be true, as contact page is shown
     }
     setIsMobileMenuOpen(false); // Always close mobile menu on navigation
   };
@@ -43,7 +44,7 @@ function App() {
   const handleGoBackToHome = () => navigateTo('home');
 
   return (
-    // ThemeProvider wraps the entire app to provide theme context
+    // The ThemeProvider is now expected to wrap this App component in your main.tsx/index.tsx file.
     <div className="min-h-screen bg-orange-50 dark:bg-gray-900 transition-colors duration-300 flex flex-col font-inter">
       {/* Integrated Header with responsive navigation and theme toggle */}
       <header className="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50 p-4 flex justify-between items-center rounded-b-xl">
