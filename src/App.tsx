@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// >>> IMPORTANT: VERIFY THESE PATHS CAREFULLY <<<
-// If App.tsx is in 'src/', and components are in 'src/components/', these paths are correct.
+// Corrected Import paths based on your file structure (App.tsx in src/, components in src/components/)
 import ChatInterface from './components/ChatInterface';
 import WelcomeScreen from './components/WelcomeScreen';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-// If ThemeContext.tsx is in 'src/contexts/', this path is correct.
-// ThemeProvider is removed from here as it will wrap App externally.
+// Corrected Import path for ThemeContext (App.tsx in src/, ThemeContext.tsx in src/contexts/)
 import { useTheme } from './contexts/ThemeContext'; 
-// >>> END PATH VERIFICATION <<<
+// Note: ThemeProvider is imported here but should wrap App in main.tsx/index.tsx
+// import { ThemeProvider } from './contexts/ThemeContext'; // This line is not needed here if ThemeProvider wraps App externally
 
 function App() {
   const [hasStartedChat, setHasStartedChat] = useState(false);
@@ -34,8 +33,9 @@ function App() {
       setHasStartedChat(true);
       setShowContactPage(false);
     } else if (view === 'contact') {
-      setHasStartedChat(true); // Should be false, as contact page is shown
-      setShowContactPage(false); // Should be true, as contact page is shown
+      // Corrected logic for navigating to contact page
+      setHasStartedChat(false); // Hide chat/welcome when contact page is shown
+      setShowContactPage(true); // Show contact page
     }
     setIsMobileMenuOpen(false); // Always close mobile menu on navigation
   };
