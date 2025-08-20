@@ -16,6 +16,10 @@ function App() {
     setSessionId(newSessionId);
   }, []);
 
+
+
+
+  console.log ("running");
   const handleStartChat = () => {
     setHasStartedChat(true);
     setShowContactPage(false); // Hide contact page if starting chat
