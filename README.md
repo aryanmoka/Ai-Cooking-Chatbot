@@ -4,6 +4,11 @@
 
 ---
 
+🔗 Live Demo
+
+👉 [Try CookBot Here](https://cookingchatbot.netlify.app/)
+
+
 ### Features
 
 #### *Frontend (React + TypeScript)*
