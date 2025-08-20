@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// Corrected Import paths based on your file structure (App.tsx in src/, components in src/components/)
+// These import paths are correct IF:
+// - Your App.tsx is directly in the 'src/' folder.
+// - Your ChatInterface, WelcomeScreen, Footer, and Contact components are in 'src/components/'.
 import ChatInterface from './components/ChatInterface';
 import WelcomeScreen from './components/WelcomeScreen';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-// Corrected Import path for ThemeContext (App.tsx in src/, ThemeContext.tsx in src/contexts/)
+// This import path is correct IF:
+// - Your ThemeContext.tsx is in 'src/contexts/'.
 import { useTheme } from './contexts/ThemeContext'; 
 // Note: ThemeProvider is imported here but should wrap App in main.tsx/index.tsx
 // import { ThemeProvider } from './contexts/ThemeContext'; // This line is not needed here if ThemeProvider wraps App externally
