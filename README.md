@@ -1,219 +1,220 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# CookBot - AI Cooking Chatbot
+## Ai-Cooking-Chatbot (aka CookBot)
 
-A full-stack AI-powered cooking assistant built with React, Flask, and OpenAI GPT-3.5.
+*Ai-Cooking-Chatbot, also called **CookBot*, is an AI-powered cooking assistant that combines a React/TypeScript frontend, a Flask/Python backend, MongoDB storage, and OpenAI’s GPT-3.5 to help users chat, get recipes, save them, and manage cooking sessions in style.
 
-## Features
+---
 
-### Frontend (React + TypeScript)
-- 🎨 Modern, responsive chat interface with dark mode support
-- 💬 Real-time messaging with typing indicators
-- 📝 Structured recipe cards with ingredient lists and step-by-step instructions
-- 📋 Copy-to-clipboard functionality for ingredients
-- 💾 Recipe saving and retrieval
-- 📱 Mobile-first responsive design
-- 🌙 Dark/light theme toggle
+🔗 Live Demo
 
-### Backend (Flask + Python)
-- 🤖 OpenAI GPT-3.5 integration with custom cooking assistant prompt
-- 🗄️ MongoDB database for conversation history and recipe storage
-- 🔄 RESTful API endpoints for chat, recipe management
-- 🛡️ CORS enabled for frontend communication
-- ⚡ Session-based conversation tracking
+👉 [Try CookBot Here](https://cookingchatbot.netlify.app/)
 
-## Project Structure
 
-```
-├── backend/                 # Flask backend
-│   ├── app.py              # Main Flask application
-│   ├── database.py         # MongoDB integration
-│   ├── requirements.txt    # Python dependencies
-│   └── .env.example       # Environment variables template
-├── src/                    # React frontend
-│   ├── components/         # React components
-│   ├── contexts/          # React contexts (Theme)
-│   ├── services/          # API service layer
-│   └── ...
-├── package.json           # Node.js dependencies
-└── README.md
-```
+### Features
 
-## Setup Instructions
+#### *Frontend (React + TypeScript)*
 
-### Prerequisites
-- Node.js 18+ and npm
-- Python 3.8+
-- MongoDB (local or cloud)
-- OpenAI API key
+* Sleek, responsive chat interface with light/dark mode toggle.
+* Real-time messaging with typing indicators.
+* Recipes rendered into structured cards: titles, ingredient lists, instructions.
+* Click-to-copy ingredients feature.
+* Save and later retrieve recipes with bookmark icons.
+* Mobile-first design.
 
-### Backend Setup
+#### *Backend (Flask + Python)*
 
-1. **Navigate to backend directory:**
-   ```bash
-   cd backend
-   ```
+* Integrated with OpenAI GPT-3.5 to process cooking queries using a custom prompt.
+* MongoDB stores chat sessions and saved recipes.
+* REST API endpoints for chat interactions and recipe handling.
+* Supports session tracking, CORS, and environment-based configuration.
 
-2. **Create virtual environment:**
-   ```bash
+---
+
+### Project Structure
+
+
+backend/
+  ├── app.py               # Flask app and routes
+  ├── database.py          # MongoDB connection
+  ├── requirements.txt     # Python dependencies
+  └── .env.example         # Template for env variables
+
+src/                      # React frontend components
+  ├── components/         # UI components
+  ├── contexts/           # Theme (Dark/Light) context
+  └── services/           # API calls (e.g., with Axios)
+
+package.json              # Node dependencies
+README.md                 # Project documentation
+…and build config files: .gitignore, tsconfig, tailwind.config.js, vite.config.ts, etc.
+
+
+---
+
+### Setup Instructions
+
+#### Prerequisites
+
+* Node.js (v18+) and npm
+* Python (v3.8+)
+* MongoDB (local or Mongo Atlas)
+* OpenAI API key
+
+#### Backend Setup
+
+1. cd backend
+2. Create virtual environment:
+
+   bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   
+3. Install Python dependencies:
 
-3. **Install dependencies:**
-   ```bash
+   bash
    pip install -r requirements.txt
-   ```
+   
+4. Configure environment variables:
 
-4. **Set up environment variables:**
-   ```bash
+   bash
    cp .env.example .env
-   ```
-   Edit `.env` and add your OpenAI API key and MongoDB URI:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   MONGODB_URI=mongodb://localhost:27017/
-   ```
+   
 
-5. **Start MongoDB:**
-   - For local MongoDB: `mongod`
-   - For cloud MongoDB: Ensure your cluster is running
+   Fill in:
 
-6. **Run the Flask server:**
-   ```bash
+   
+   OPENAI_API_KEY=your_key
+   MONGODB_URI=your_mongodb_uri
+   
+5. Ensure MongoDB is running (locally or via cloud).
+6. Run backend:
+
+   bash
    python app.py
-   ```
-   The backend will run on `http://localhost:5000`
+   
 
-### Frontend Setup
+   → Backend now available at http://localhost:5000.
 
-1. **Install dependencies:**
-   ```bash
+#### Frontend Setup
+
+1. From project root, run:
+
+   bash
    npm install
-   ```
-
-2. **Start the development server:**
-   ```bash
    npm run dev
-   ```
-   The frontend will run on `http://localhost:5173`
+   
 
-## API Endpoints
+   → Frontend hosted at http://localhost:5173.
 
-### POST /api/chat
-Send a message to the AI cooking assistant.
+---
 
-**Request:**
-```json
-{
-  "message": "How do I make pasta?",
-  "session_id": "session_123"
-}
-```
+### API Endpoints
 
-**Response:**
-```json
-{
-  "response": "Here's how to make pasta...",
-  "session_id": "session_123",
-  "is_recipe": true,
-  "recipe_data": {
-    "title": "Basic Pasta",
-    "ingredients": ["1 lb pasta", "Salt", "Water"],
-    "instructions": ["Boil water...", "Add pasta..."]
+* *POST /api/chat*
+  Send your cooking message.
+  *Request body*:
+
+  json
+  {
+    "message": "How do I make pasta?",
+    "session_id": "session_123"
   }
-}
-```
+  
 
-### POST /api/save_recipe
-Save a recipe to the user's collection.
+  *Response*:
 
-### GET /api/my_recipes
-Retrieve all saved recipes for a session.
+  json
+  {
+    "response": "Here's how to make pasta...",
+    "session_id": "session_123",
+    "is_recipe": true,
+    "recipe_data": {
+      "title": "Basic Pasta",
+      "ingredients": ["1 lb pasta", "Salt", "Water"],
+      "instructions": ["Boil water...", "Add pasta..."]
+    }
+  }
+  
 
-### GET /api/health
-Health check endpoint.
+* *POST /api/save\_recipe*
+  Save the current recipe.
 
-## Database Schema
+* *GET /api/my\_recipes*
+  Retrieve all saved recipes for the session.
 
-### conversations Collection
-```javascript
-{
-  session_id: String,
-  history: Array,
-  created_at: Date,
-  updated_at: Date
-}
-```
+* *GET /api/health*
+  Health check endpoint (e.g., to verify server is running).
 
-### recipes Collection
-```javascript
-{
-  recipe_id: String,
-  session_id: String,
-  recipe_data: Object,
-  saved_at: Date
-}
-```
+---
 
-## Usage
+### Database Schema
 
-1. **Start a conversation:** Click "Start Cooking Together" on the welcome screen
-2. **Ask cooking questions:** Type questions about recipes, ingredients, or cooking techniques
-3. **Get structured recipes:** The AI will format recipes with ingredients and instructions
-4. **Copy ingredients:** Use the copy button to copy ingredient lists to clipboard
-5. **Save recipes:** Click the bookmark icon to save recipes for later
-6. **Toggle theme:** Use the theme toggle in the header to switch between light and dark modes
+*collections*:
 
-## Example Prompts
+* *conversations*
 
-- "What can I make with chicken and rice?"
-- "Give me a recipe for chocolate cake"
-- "How do I make pasta from scratch?"
-- "Quick dinner ideas for two people"
-- "What's a good substitute for eggs in baking?"
+  json
+  {
+    session_id: String,
+    history: Array,
+    created_at: Date,
+    updated_at: Date
+  }
+  
 
-## Technologies Used
+* *recipes*
 
-### Frontend
-- React 18 + TypeScript
-- Tailwind CSS for styling
-- Lucide React for icons
-- Axios for API calls
-- Context API for theme management
+  json
+  {
+    recipe_id: String,
+    session_id: String,
+    recipe_data: Object,
+    saved_at: Date
+  }
+  
 
-### Backend
-- Flask (Python web framework)
-- OpenAI GPT-3.5 API
-- PyMongo (MongoDB driver)
-- Flask-CORS for cross-origin requests
-- python-dotenv for environment variables
+---
 
-### Database
-- MongoDB for conversation history and recipe storage
+### How to Use
 
-## Development Notes
+1. Open the app and click *"Start Cooking Together"*.
+2. Chat like you would with a cooking assistant:
 
-- The system prompt is carefully crafted to ensure the AI responds as a helpful cooking assistant
-- Recipe responses are structured as JSON for proper parsing and display
-- Session-based conversation tracking allows for contextual follow-up questions
-- Dark mode preference is persisted in localStorage
-- All API calls include proper error handling and user feedback
+   * “What can I make with chicken and rice?”
+   * “Give me a recipe for chocolate cake.”
+   * “What’s a good egg substitute for baking?”
+3. Get a recipe card: title, ingredient list, steps.
+4. Use *copy* to copy ingredients quickly.
+5. Click the *bookmark* icon to save favorite recipes.
+6. Switch between light and dark themes anytime.
 
-## Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+### Technologies Used
 
-## License
+| Layer        | Tech Stack                                                                 |
+| ------------ | -------------------------------------------------------------------------- |
+| *Frontend* | React 18, TypeScript, Tailwind CSS, Lucide React icons, Axios, Context API |
+| *Backend*  | Flask (Python), OpenAI GPT-3.5, PyMongo, Flask-CORS, python-dotenv         |
+| *Database* | MongoDB                                                                    |
 
-This project is licensed under the MIT License.
-=======
-# Ai-Cooking-Chatbot
->>>>>>> b3ba9f55b22a2371b4b61353d3c87617830f6271
-=======
-# Ai-Cooking-Chatbot
->>>>>>> 341dee0eba9b5d524621e3ceefacf04c404a7cc4
+---
+
+### Development Notes
+
+* The cooking assistant prompt is carefully crafted for helpful, structured output.
+* Recipe outputs are JSON to allow clean parsing.
+* Session-based chats let you have follow-ups with memory.
+* Dark mode preference stays stored in localStorage.
+* API calls use proper error handling and user feedback.
+
+---
+
+### Contributing
+
+To contribute:
+
+1. *Fork* the repository.
+2. Create your *feature branch*.
+3. Implement your changes.
+4. Add tests if needed.
+5. Submit a *pull request* for review.
