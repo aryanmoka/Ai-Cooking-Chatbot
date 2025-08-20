@@ -55,7 +55,7 @@ function App() {
       {/* Integrated Header with responsive navigation and theme toggle */}
       <header className="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50 p-4 flex justify-between items-center rounded-b-xl">
         <div className="text-2xl font-bold text-indigo-600 dark:text-orange-400">
-          CookBot
+          Chef Byte
         </div>
 
         {/* Desktop Navigation */}
@@ -154,12 +154,12 @@ function App() {
           </li>
           <li>
             {/* Go Back to Home button in mobile menu */}
-            <button
+            {/* <button
               onClick={handleGoBackToHome}
               className="w-full text-left text-gray-800 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-orange-400 py-3 px-4 rounded-md transition duration-300 font-medium text-lg"
             >
               Go Back to Home
-            </button>
+            </button> */}
           </li>
         </ul>
       </nav>
