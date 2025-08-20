@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+// Import Moon and Sun icons from lucide-react
+import { Moon, Sun } from 'lucide-react'; 
+
 // These import paths are correct IF:
 // - Your App.tsx is directly in the 'src/' folder.
 // - Your ChatInterface, WelcomeScreen, Footer, and Contact components are in 'src/components/'.
